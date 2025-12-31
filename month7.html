@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>July ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff0f3;
+  padding: 25px;
+  overflow: hidden;
+}
+
+/* animated gradient background */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(120deg, #fff0f3 0%, #ffeef6 30%, #fffdf6 60%, #fff0f3 100%);
+  transform: translateZ(0);
+  filter: blur(20px);
+  opacity: 0.9;
+  animation: bgShift 12s linear infinite alternate;
+}
+
+@keyframes bgShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  bottom: -120px;
+  font-size: 60px;
+  opacity: 0.2;
+  animation: floatHeart linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(0) rotate(0deg) scale(0.9); opacity: 0.9; }
+  30% { transform: translateY(-35vh) rotate(10deg) scale(1); opacity: 0.95; }
+  70% { transform: translateY(-90vh) rotate(-10deg) scale(1.05); opacity: 0.7; }
+  100% { transform: translateY(-140vh) rotate(25deg) scale(1.1); opacity: 0; }
+}
+
+/* small pop-in for hearts when created */
+.heart.pop-in{
+  animation-name: popAndFloat, floatHeart;
+  animation-duration: 0.6s, var(--dur, 14s);
+  animation-fill-mode: both;
+}
+
+@keyframes popAndFloat{
+  0%{ transform: translateY(0) scale(0.2); opacity: 0; }
+  60%{ transform: translateY(-6px) scale(1.05); opacity: 1; }
+  100%{ transform: translateY(-12px) scale(1); opacity: 1; }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.card{
+  background: rgba(255,255,255,0.75);
+  padding: 22px;
+  border-radius: 16px;
+  max-width: 820px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(164,19,60,0.08);
+  backdrop-filter: blur(6px) saturate(1.05);
+  transform-origin: center top;
+  animation: cardEnter 700ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+@keyframes cardEnter{
+  from { transform: translateY(18px) scale(.995); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+h1 {
+  color: #a4133c;
+}
+
+/* animated title underline & gentle float */
+.title {
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+  animation: titleFloat 5s ease-in-out infinite;
+}
+
+.title::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  bottom: -8px;
+  background: linear-gradient(90deg,#ffb3c6 0%, #a4133c 60%);
+  border-radius: 6px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: underline 1.2s ease-out forwards;
+}
+
+@keyframes underline{
+  to { transform: scaleX(1); }
+}
+
+@keyframes titleFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-6px); }
+}
+
+img {
+  width: 100%;
+  border-radius: 18px;
+  margin-top: 15px;
+}
+
+.photo{
+  display:block;
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1), box-shadow 420ms;
+  transform-origin: center;
+  animation: photoFloat 8s ease-in-out infinite;
+}
+
+@keyframes photoFloat{
+  0%{ transform: translateY(0) scale(1); }
+  50%{ transform: translateY(-8px) scale(1.01); }
+  100%{ transform: translateY(0) scale(1); }
+}
+
+img:hover.photo, .photo:hover{
+  transform: scale(1.02) translateY(-6px);
+  box-shadow: 0 18px 40px rgba(164,19,60,0.12);
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: none;
+  background: #a4133c;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 240ms;
+  box-shadow: 0 6px 18px rgba(164,19,60,0.12);
+}
+
+button:hover{
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 36px rgba(164,19,60,0.14);
+}
+
+button:active{
+  transform: translateY(0) scale(.995);
+}
+/* Desktop-first: enforce laptop layout (two-column card) on all viewports */
+.card{ max-width:980px; padding:32px }
+.card-grid{ display:flex; gap:22px; align-items:flex-start }
+.card-text{ flex:1; min-width:420px }
+.photo{ width:48%; flex:0 0 48%; margin-top:0 }
+.controls button{ margin-top:12px }
+</style>
+</head>
+
+<body>
+
+<div class="content">
+  <div class="card">
+    <h1 class="title">July ❤️</h1>
+    <div class="card-grid">
+      <img class="photo" src="assets/images/july.jpeg" alt="July moment">
+      <div class="card-text">
+        <p class="lead" style="margin-top:10px; color:#5a212d; line-height:1.5; font-size:16px; opacity:0.95;">July was the best. Someone finally came and confessed their love and honestly, that moment felt unreal. I didn’t want to waste even a minute thinking twice, and I said yes without hesitation. It’s one of the best decisions I’ve ever made.
+From that moment on, everything felt clear. There was no confusion, no pretending  just love, honesty, and choosing each other. We didn’t follow any rules or labels; we simply let our hearts lead. July felt warm, certain, and full in a way I’ll always cherish.
+.</p>
+
+        <div class="controls" style="margin-top:14px; display:flex; gap:12px;">
+          <button onclick="location.href='month6.html'">⬅ Back</button>
+          <button onclick="location.href='month8.html'">Next ➡</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// floating hearts with slight pop and variety
+const hearts = ["❤️","💖","💘","💕","💗"];
+function spawnHeart(){
+  const h = document.createElement('div');
+  h.className = 'heart pop-in';
+  h.innerText = hearts[Math.floor(Math.random()*hearts.length)];
+  const size = 28 + Math.random()*64; // px
+  h.style.fontSize = size + 'px';
+  h.style.left = (6 + Math.random()*88) + 'vw';
+  h.style.setProperty('--dur', (10 + Math.random()*12) + 's');
+  // subtle hue shift using filter
+  const hue = Math.floor(330 + Math.random()*30);
+  h.style.filter = `drop-shadow(0 6px 8px rgba(164,19,60,0.08)) hue-rotate(${Math.random()*20 - 10}deg)`;
+  // slight rotation start
+  h.style.transform = `translateY(0) rotate(${Math.random()*20-10}deg)`;
+  document.body.appendChild(h);
+  // cleanup after its animation finishes
+  const lifetime = parseFloat(getComputedStyle(h).getPropertyValue('--dur'))*1000 + 1200;
+  setTimeout(()=> h.remove(), lifetime);
+}
+
+// stagger spawn with small random interval
+let heartTimer = setInterval(spawnHeart, 700);
+
+// small celebratory confetti on page load (lightweight)
+function burstConfetti(){
+  const colors = ['#ffb3c6','#ffd4e0','#ffefef','#a4133c','#ffc9d8'];
+  for(let i=0;i<14;i++){
+    const d = document.createElement('div');
+    d.style.position='fixed';
+    d.style.left = (20 + Math.random()*60) + 'vw';
+    d.style.top = (10 + Math.random()*30) + 'vh';
+    d.style.width = d.style.height = (6 + Math.random()*8) + 'px';
+    d.style.background = colors[Math.floor(Math.random()*colors.length)];
+    d.style.borderRadius = (Math.random()>0.5)?'50%':'2px';
+    d.style.zIndex = 1;
+    d.style.opacity = '0.95';
+    d.style.transform = `translateY(0) rotate(${Math.random()*360}deg)`;
+    d.style.pointerEvents = 'none';
+    document.body.appendChild(d);
+    const dur = 1400 + Math.random()*1200;
+    d.animate([
+      { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+      { transform: `translateY(${120 + Math.random()*120}px) rotate(${Math.random()*720}deg)`, opacity: 0 }
+    ], { duration: dur, easing: 'cubic-bezier(.2,.7,.2,1)' });
+    setTimeout(()=> d.remove(), dur+80);
+  }
+}
+
+window.addEventListener('load', ()=>{
+  // one quick confetti burst and a few hearts upfront
+  burstConfetti();
+  for(let i=0;i<6;i++){ setTimeout(spawnHeart, i*150); }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff0f3;
+  padding: 25px;
+  overflow: hidden;
+}
+
+/* animated gradient background */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(120deg, #ffd8e2 0%, #ffb3c6 40%, #a4133c 100%);
+  transform: translateZ(0);
+  filter: blur(26px);
+  opacity: 0.95;
+  animation: bgShift 14s linear infinite alternate;
+}
+
+@keyframes bgShift{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+.content { position: relative; z-index: 2; }
+
+.card{ background: rgba(255,255,255,0.9); padding: 34px 26px; border-radius: 18px; max-width: 980px; margin: 40px auto; box-shadow: 0 14px 40px rgba(164,19,60,0.08); }
+
+.title{ display:inline-block; color:#a4133c; font-size:30px; animation: titleFloat 5s ease-in-out infinite; }
+.title::after{ content:""; position:absolute; left:0; right:0; height:4px; bottom:-8px; background: linear-gradient(90deg,#ffb3c6 0%, #a4133c 60%); border-radius:6px; transform-origin:left center; transform:scaleX(0); animation: underline 1.2s ease-out forwards; display:block; }
+
+@keyframes underline{ to{ transform:scaleX(1) } }
+@keyframes titleFloat{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } }
+
+#timer{ font-size:18px; margin:18px 0; color:#5a212d; font-weight:600 }
+p{ color:#5a212d; line-height:1.6 }
+
+button{ margin-top:8px; padding:12px 20px; border-radius:22px; border:none; background:#a4133c; color:white; font-weight:700; cursor:pointer; box-shadow:0 8px 26px rgba(164,19,60,0.12); transition:transform 160ms, box-shadow 160ms }
+button:hover{ transform:translateY(-3px) }
+
+/* Hearts */
+.heart{ position: fixed; bottom:-120px; font-size:60px; opacity:0.2; z-index:0 }
+
+@keyframes floatHeart{ 0%{ transform:translateY(0) rotate(0deg) scale(.9); opacity:.9 } 30%{ transform:translateY(-35vh) rotate(10deg) scale(1); opacity:.95 } 70%{ transform:translateY(-90vh) rotate(-10deg) scale(1.05); opacity:.7 } 100%{ transform:translateY(-140vh) rotate(25deg) scale(1.1); opacity:0 } }
+
+.heart.pop-in{ animation-name: popAndFloat, floatHeart; animation-duration: .6s, var(--dur,14s); animation-fill-mode: both }
+@keyframes popAndFloat{ 0%{ transform:translateY(0) scale(0.2); opacity:0 } 60%{ transform:translateY(-6px) scale(1.05); opacity:1 } 100%{ transform:translateY(-12px) scale(1); opacity:1 } }
+
+</style>
+</head>
+
+<body>
+
+<div class="content">
+  <div class="card">
+  <h1 class="title">Happy Birthday babyyyyyyyyyy  ❤️</h1>
+
+
+
+  <p>This year wasn’t perfect. But every month with you meant something. So I saved our year one memory at a time.</p>
+
+    <div id="timer">Loading...</div>
+
+    <button onclick="location.href='level.html'">Start Our Year 💖</button>
+  </div>
+</div>
+
+<script>
+// floating hearts with slight pop and variety
+const hearts = ["❤️","💖","💘","💕","💗"];
+function spawnHeart(){
+  const h = document.createElement('div');
+  h.className = 'heart pop-in';
+  h.innerText = hearts[Math.floor(Math.random()*hearts.length)];
+  const size = 30 + Math.random()*64; h.style.fontSize = size + 'px';
+  h.style.left = (6 + Math.random()*88) + 'vw';
+  h.style.setProperty('--dur', (10 + Math.random()*12) + 's');
+  h.style.filter = `drop-shadow(0 6px 8px rgba(164,19,60,0.08)) hue-rotate(${Math.random()*20-10}deg)`;
+  document.body.appendChild(h);
+  const lifetime = parseFloat(getComputedStyle(h).getPropertyValue('--dur'))*1000 + 1200;
+  setTimeout(()=> h.remove(), lifetime);
+}
+let heartTimer = setInterval(spawnHeart, 700);
+
+// small confetti burst
+function burstConfetti(){
+  const colors = ['#ffb3c6','#ffd4e0','#ffefef','#a4133c','#ffc9d8'];
+  for(let i=0;i<12;i++){
+    const d = document.createElement('div');
+    d.style.position='fixed'; d.style.left=(20+Math.random()*60)+'vw'; d.style.top=(10+Math.random()*30)+'vh';
+    d.style.width=d.style.height=(6+Math.random()*8)+'px'; d.style.background=colors[Math.floor(Math.random()*colors.length)];
+    d.style.borderRadius=(Math.random()>0.5)?'50%':'2px'; d.style.zIndex=1; d.style.opacity='0.95'; d.style.pointerEvents='none';
+    document.body.appendChild(d);
+    const dur=1200+Math.random()*1200;
+    d.animate([{transform:'translateY(0)',opacity:1},{transform:`translateY(${120+Math.random()*120}px)`,opacity:0}],{duration:dur,easing:'cubic-bezier(.2,.7,.2,1)'});
+    setTimeout(()=>d.remove(),dur+80);
+  }
+}
+
+window.addEventListener('load', ()=>{ burstConfetti(); for(let i=0;i<6;i++) setTimeout(spawnHeart,i*150); });
+
+/* Countdown */
+const birthday = new Date("2025-01-01T00:00:00");
+setInterval(() => {
+  const now = new Date(); const diff = birthday - now;
+  const el = document.getElementById('timer');
+  if (diff <= 0) { el.innerText = "It’s your day ❤️"; return; }
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff/(1000*60*60))%24);
+  const m = Math.floor((diff/(1000*60))%60);
+  const s = Math.floor((diff/1000)%60);
+  el.innerText = `${d}d ${h}h ${m}m ${s}s`;
+}, 1000);
+</script>
+
+</body>
+</html>

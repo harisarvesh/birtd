@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>December ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff0f3;
+  padding: 25px;
+  overflow: hidden;
+}
+
+/* animated gradient background */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(120deg, #fff0f3 0%, #ffeef6 30%, #fffdf6 60%, #fff0f3 100%);
+  transform: translateZ(0);
+  filter: blur(20px);
+  opacity: 0.9;
+  animation: bgShift 12s linear infinite alternate;
+}
+
+@keyframes bgShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  bottom: -120px;
+  font-size: 60px;
+  opacity: 0.2;
+  animation: floatHeart linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(0) rotate(0deg) scale(0.9); opacity: 0.9; }
+  30% { transform: translateY(-35vh) rotate(10deg) scale(1); opacity: 0.95; }
+  70% { transform: translateY(-90vh) rotate(-10deg) scale(1.05); opacity: 0.7; }
+  100% { transform: translateY(-140vh) rotate(25deg) scale(1.1); opacity: 0; }
+}
+
+/* small pop-in for hearts when created */
+.heart.pop-in{
+  animation-name: popAndFloat, floatHeart;
+  animation-duration: 0.6s, var(--dur, 14s);
+  animation-fill-mode: both;
+}
+
+@keyframes popAndFloat{
+  0%{ transform: translateY(0) scale(0.2); opacity: 0; }
+  60%{ transform: translateY(-6px) scale(1.05); opacity: 1; }
+  100%{ transform: translateY(-12px) scale(1); opacity: 1; }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  color: #a4133c;
+}
+
+img {
+  width: 100%;
+  border-radius: 18px;
+  margin-top: 15px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: none;
+  background: #a4133c;
+  color: white;
+  font-size: 14px;
+}
+/* Desktop-first: enforce laptop layout (two-column card) on all viewports */
+.card{ max-width:980px; padding:32px }
+.card-grid{ display:flex; gap:22px; align-items:flex-start }
+.card-text{ flex:1; min-width:420px }
+.photo{ width:48%; flex:0 0 48%; margin-top:0 }
+.controls button{ margin-top:12px }
+</style>
+</head>
+
+<body>
+
+<div class="content">
+  <div class="card" style="background:rgba(255,255,255,0.85); padding:22px; border-radius:14px; margin:0 auto; box-shadow:0 10px 30px rgba(164,19,60,0.06)">
+    <h1 class="title">December ❤️</h1>
+    <div class="card-grid">
+      <img class="photo" src="assets/images/dec.jpeg" alt="December moment">
+      <div class="card-text">
+        <p class="lead" style="margin-top:10px; color:#5a212d; line-height:1.5; font-size:16px; opacity:0.95;">December… there’s one day I’ll never want to forget the day I took you on a proper date to PNS Nakshatra. Damini, I loved that day so much. The way you looked flawlessly beautifulstill stays in my eyes. Every smile, every laugh, every little moment we shared that day made it unforgettable. I keep thinking about it, and I wish every other day of 2026 could feel just as magical with you.
+This year may have been wonderful in its own way, but with you by my side, I know next year can be even better. I want us to make every day count, to celebrate every little moment together, and to create memories as beautiful as that day. Wishing you the happiest birthday, baby. I love you more than words can say, and I can’t wait to celebrate every New Year, every birthday, and every special moment with you the same way full of love, laughter, and us.
+You make everything brighter, happier, and more meaningful. I’m so grateful for you, for us, and for every memory we’ve made and will continue to make. Love you forever and always, muahhhhh!
+.</p>
+
+        <div class="controls" style="display:flex; gap:12px; margin-top:12px;">
+          <button onclick="location.href='month11.html'">⬅ Back</button>
+          <button onclick="location.href='level.html'">Next ➡</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// floating hearts with slight pop and variety
+const hearts = ["❤️","💖","💘","💕","💗"];
+function spawnHeart(){
+  const h = document.createElement('div');
+  h.className = 'heart pop-in';
+  h.innerText = hearts[Math.floor(Math.random()*hearts.length)];
+  const size = 28 + Math.random()*64; // px
+  h.style.fontSize = size + 'px';
+  h.style.left = (6 + Math.random()*88) + 'vw';
+  h.style.setProperty('--dur', (10 + Math.random()*12) + 's');
+  h.style.filter = `drop-shadow(0 6px 8px rgba(164,19,60,0.08)) hue-rotate(${Math.random()*20 - 10}deg)`;
+  h.style.transform = `translateY(0) rotate(${Math.random()*20-10}deg)`;
+  document.body.appendChild(h);
+  const lifetime = parseFloat(getComputedStyle(h).getPropertyValue('--dur'))*1000 + 1200;
+  setTimeout(()=> h.remove(), lifetime);
+}
+
+let heartTimer = setInterval(spawnHeart, 700);
+
+function burstConfetti(){
+  const colors = ['#ffb3c6','#ffd4e0','#ffefef','#a4133c','#ffc9d8'];
+  for(let i=0;i<14;i++){
+    const d = document.createElement('div');
+    d.style.position='fixed'; d.style.left=(20+Math.random()*60)+'vw'; d.style.top=(10+Math.random()*30)+'vh';
+    d.style.width=d.style.height=(6+Math.random()*8)+'px'; d.style.background=colors[Math.floor(Math.random()*colors.length)];
+    d.style.borderRadius=(Math.random()>0.5)?'50%':'2px'; d.style.zIndex=1; d.style.opacity='0.95'; d.style.pointerEvents='none';
+    document.body.appendChild(d);
+    const dur=1400+Math.random()*1200;
+    d.animate([{transform:'translateY(0) rotate(0deg)',opacity:1},{transform:`translateY(${120+Math.random()*120}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:dur,easing:'cubic-bezier(.2,.7,.2,1)'});
+    setTimeout(()=>d.remove(),dur+80);
+  }
+}
+
+window.addEventListener('load', ()=>{ burstConfetti(); for(let i=0;i<6;i++) setTimeout(spawnHeart,i*150); });
+</script>
+
+</body>
+</html>
